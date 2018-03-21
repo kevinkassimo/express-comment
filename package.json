@@ -1,0 +1,17 @@
+{
+  "name": "express-comment",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Kevin Qian <kevinkassimo@gmail.com> (http://ksm.sh)",
+  "license": "ISC",
+  "dependencies": {
+    "debug": "^3.1.0",
+    "express": "^4.16.3",
+    "mongodb": "^3.0.4"
+  }
+}
