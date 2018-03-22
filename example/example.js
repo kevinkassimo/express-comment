@@ -23,11 +23,11 @@ const authCheck = function(req, res, next) {
 
 app.use('/comment', /* authCheck, */ comment(driverTypes.MONGO, {}));
 
-app.use((err, req, res) => {
-  if (e === 'unauthorized') {
+app.use((err, req, res, next) => {
+  if (err === 'unauthorized') {
     res.sendStatus(401);
   } else {
-    res.sendStatus(404);
+    res.status(400).send(err.toString());
   }
 });
 
