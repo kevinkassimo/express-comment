@@ -1,4 +1,5 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 // const jwt = require('jsonwebtoken')
 const app = express();
 const comment = require('../lib/backend');
@@ -21,7 +22,11 @@ const authCheck = function(req, res, next) {
 }
 */
 
-app.use('/comment', /* authCheck, */ comment(driverTypes.MONGO, {}));
+app.use('/comment', bodyParser.urlencoded({ extended: true }), /* authCheck, */ comment(driverTypes.MONGO, {}));
+
+app.get('/', (req, res, next) => {
+  res.sendStatus(200);
+});
 
 app.use((err, req, res, next) => {
   if (err === 'unauthorized') {
@@ -29,6 +34,7 @@ app.use((err, req, res, next) => {
   } else {
     res.status(400).send(err.toString());
   }
+  console.log(err);
 });
 
 app.listen(3000);

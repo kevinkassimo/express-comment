@@ -1,5 +1,6 @@
 # Query Format
 
+## `POST` actions
 ```
 # insert
 action = insert
@@ -22,7 +23,10 @@ postId? = id
 username? = username
 assoc? = assoc_id
 parentId? = parent_id
+```
 
+## `GET` actions  
+```
 # findById
 action = findById
 postId = id
