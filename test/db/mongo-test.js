@@ -48,6 +48,33 @@ describe('backend/db/mongo', function() {
       });
   });
 
+  it('should update entry', function(done) {
+    let insertedId;
+    mongo.insert('user0', 'body0', 'assoc', null, '{}')
+      .then(function(id) {
+        insertedId = id;
+        return mongo.update(insertedId, 'A', 'B', 'C');
+      })
+      .then(function() {
+        return mongo.findById(insertedId);
+      })
+      .then(function(result) {
+        assert.equal(result.username, 'A');
+        assert.equal(result.body, 'B');
+        assert.equal(result.assoc, 'assoc');
+        assert.equal(result.parentId, null);
+        assert.equal(result.opaque, 'C');
+        assert(!!result.createdAt);
+        assert(!!result.modifiedAt);
+      })
+      .then(function() {
+        return mongo.delete(insertedId);
+      })
+      .then(function() {
+        done();
+      });
+  });
+
   it('should insert nested entry and delete correctly', function(done) {
     let childId, parentId;
     let sameAssocId;
@@ -107,6 +134,9 @@ describe('backend/db/mongo', function() {
       })
       .then(function(result) {
         assert.equal(result.length, 1);
+        return mongo.delete(null, null, 'assoc1', null);
+      })
+      .then(function() {
         done();
       })
   });
