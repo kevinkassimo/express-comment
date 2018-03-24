@@ -1,3 +1,4 @@
 module.exports = {
-  backend: require('./lib/backend')
+  backend: require('./lib/backend'),
+  frontend: require('./lib/frontend'),
 };

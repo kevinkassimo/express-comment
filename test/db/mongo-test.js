@@ -32,13 +32,13 @@ describe('backend/db/mongo', function() {
         return mongo.findById(id);
       })
       .then(function(result) {
-        assert.equal(result.username, 'user0');
-        assert.equal(result.body, 'body0');
-        assert.equal(result.assoc, 'assoc');
-        assert.equal(result.parentId, null);
-        assert.equal(result.opaque, '{}');
-        assert(!!result.createdAt);
-        assert(!!result.modifiedAt);
+        assert.equal(result[0].username, 'user0');
+        assert.equal(result[0].body, 'body0');
+        assert.equal(result[0].assoc, 'assoc');
+        assert.equal(result[0].parentId, null);
+        assert.equal(result[0].opaque, '{}');
+        assert(!!result[0].createdAt);
+        assert(!!result[0].modifiedAt);
       })
       .then(function() {
         return mongo.delete(insertedId);
@@ -53,19 +53,19 @@ describe('backend/db/mongo', function() {
     mongo.insert('user0', 'body0', 'assoc', null, '{}')
       .then(function(id) {
         insertedId = id;
-        return mongo.update(insertedId, 'A', 'B', 'C');
+        return mongo.update(insertedId, 'B', 'C');
       })
       .then(function() {
         return mongo.findById(insertedId);
       })
       .then(function(result) {
-        assert.equal(result.username, 'A');
-        assert.equal(result.body, 'B');
-        assert.equal(result.assoc, 'assoc');
-        assert.equal(result.parentId, null);
-        assert.equal(result.opaque, 'C');
-        assert(!!result.createdAt);
-        assert(!!result.modifiedAt);
+        assert.equal(result[0].username, 'user0');
+        assert.equal(result[0].body, 'B');
+        assert.equal(result[0].assoc, 'assoc');
+        assert.equal(result[0].parentId, null);
+        assert.equal(result[0].opaque, 'C');
+        assert(!!result[0].createdAt);
+        assert(!!result[0].modifiedAt);
       })
       .then(function() {
         return mongo.delete(insertedId);
@@ -89,16 +89,16 @@ describe('backend/db/mongo', function() {
         return mongo.findById(parentId, true); // recursive
       })
       .then(function(result) {
-        assert.equal(result.username, 'user0');
-        assert.equal(result.body, 'A');
-        assert.equal(result.assoc, 'assoc');
-        assert.equal(result.parentId, null);
-        assert.equal(result.opaque, '{}');
-        assert(!!result.createdAt);
-        assert(!!result.modifiedAt);
+        assert.equal(result[0].username, 'user0');
+        assert.equal(result[0].body, 'A');
+        assert.equal(result[0].assoc, 'assoc');
+        assert.equal(result[0].parentId, null);
+        assert.equal(result[0].opaque, '{}');
+        assert(!!result[0].createdAt);
+        assert(!!result[0].modifiedAt);
 
-        assert.equal(result.reply[0].username, 'reply00');
-        assert.equal(result.reply[0]._id, childId);
+        assert.equal(result[0].reply[0].username, 'reply00');
+        assert.equal(result[0].reply[0]._id, childId);
         return null;
       })
       .then(function() {

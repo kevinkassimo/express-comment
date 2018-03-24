@@ -13,7 +13,6 @@ opaque? = opaque data || JSONString
 # update
 action = update
 postId = id
-username? = username
 body? = any
 opaque? = opaque data || JSONString
 
@@ -32,12 +31,15 @@ action = findById
 postId = id
 isRecursive? = true|false
 
-# findByUsername
-action = findByUsername
-username = username
+# findByUsernameAndAssoc
+action = findByUsernameAndAssoc
+username? = username
+assoc? = assoc_id
+limit? = limit_count
 
 # findRootByAssoc
 action = findRootByAssoc
 assoc = assoc_id
 isRecursive? = true|false
+limit? = limit_count
 ```

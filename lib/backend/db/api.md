@@ -29,12 +29,11 @@ db.insert(username, body, assoc, parentId, opaque);
 /*
  * Update an existing comment by postId. null if no change needed for fields
  * @param {string} postId *required*
- * @param {string|null} username
  * @param {string|null} body
  * @param {string|null} opaque
  * @returns {Promise}
  */
-db.update(postId, username, body, opaque);
+db.update(postId, body, opaque);
 
 /*
  * Delete comments by given fields. Though all optional, must have one non-null to make it effective
@@ -64,16 +63,19 @@ db.findByParentId(parentId, isRecursive = false);
 
 /*
  * Find by parentId, must be flat and non-recursive
- * @param {string} username *required*
+ * @param {string} username
+ * @param {string} assoc
+ * @param {number|null} [limit]
  * @returns {Promise} with param entries (type Object[]): found flat entries
  */
-db.findByUsername(username);
+db.findByUsernameAndAssoc(username = null, assoc = null, limit = null);
 
 /*
  * Find root comments associated by assoc, default non-recursive (entries.$.reply not populated)
  * @param {string} assoc: associated article identifier, should be string *required*
  * @param {boolean} [isRecursive]
+ * @param {number|null} [limit]
  * @returns {Promise} with param entries (type Object[]): found entries. Would have entries.$.reply populated by child comments if isRecursive = true
  */
-db.findRootByAssoc(assoc, isRecursive = false);
+db.findRootByAssoc(assoc, isRecursive = false, limit = null);
 ```

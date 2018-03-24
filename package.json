@@ -1,7 +1,7 @@
 {
   "name": "express-comment",
-  "version": "0.0.1",
-  "description": "UNDER DEVELOPMENT, do NOT DOWNLOAD YET",
+  "version": "0.0.2",
+  "description": "UNDER DEVELOPMENT, DO NOT DOWNLOAD YET",
   "main": "index.js",
   "scripts": {
     "test": "mocha --reporter spec --bail --check-leaks test/*"
