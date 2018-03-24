@@ -1,7 +1,7 @@
 {
   "name": "express-comment",
-  "version": "0.0.2",
-  "description": "UNDER DEVELOPMENT, DO NOT DOWNLOAD YET",
+  "version": "0.0.3",
+  "description": "Express simple article/post comment system middleware (Under Pre-Alpha Development, Docs not yet complete/stable)",
   "main": "index.js",
   "scripts": {
     "test": "mocha --reporter spec --bail --check-leaks test/*"
