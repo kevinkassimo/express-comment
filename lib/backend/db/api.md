@@ -62,7 +62,7 @@ db.findById(postId, isRecursive = false);
 db.findByParentId(parentId, isRecursive = false);
 
 /*
- * Find by parentId, must be flat and non-recursive
+ * Find by username and assoc, must be flat and non-recursive
  * @param {string} username
  * @param {string} assoc
  * @param {number|null} [limit]
