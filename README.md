@@ -81,10 +81,10 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const comment = require('../lib/backend');
-const driverTypes = comment.driverTypes;
+const drivers = comment.drivers;
 
 // with MongoDB (Mongo Native Client)
-app.use('/path/middleware/mounted', bodyParser.urlencoded({ extended: true }), comment(driverTypes.MONGO, {}));
+app.use('/path/middleware/mounted', bodyParser.urlencoded({ extended: true }), comment(drivers.mongo({})));
 
 // or if with Sequelize.js (supporting MySQL, PostgreSQL, SQLite, etc.)
 const sequelize_config = {
@@ -105,7 +105,7 @@ const sequelize_config = {
   username: 'root',
   password: '',
 }
-app.use('/path/middleware/mounted', bodyParser.urlencoded({ extended: true }), comment(driverTypes.SQL, sequelize_config));
+app.use('/path/middleware/mounted', bodyParser.urlencoded({ extended: true }), comment(drivers.sql(sequelize_config)));
 
 /* ... */
 
@@ -114,3 +114,8 @@ app.use('/path/middleware/mounted', bodyParser.urlencoded({ extended: true }), c
 
 ## TODOs
 API stability, settlement of final design, better documentation, etc.
+
+## Ideas
+1. Insert cap (max reply level, implement with adding an extra field (level, 0 as root comment)to each entry) (__DONE__)
+2. `comment(driverType.MONGO, settings)` -> `comment(driver.mongo(settings), comment_settings)`
+3. implement range for recursive actions (`comment.findAll(startRange, endRange)`)

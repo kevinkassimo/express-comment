@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 // const jwt = require('jsonwebtoken')
 const app = express();
 const comment = require('../lib/backend');
-const driverTypes = comment.driverTypes;
+const drivers= comment.drivers;
 
 const secret = 'my_secret';
 
@@ -38,7 +38,7 @@ const config = {
   },
 }
 
-app.use('/comment', bodyParser.urlencoded({ extended: true }), /* authCheck, */ comment(driverTypes.SQL, config));
+app.use('/comment', bodyParser.urlencoded({ extended: true }), /* authCheck, */ comment(drivers.sql(config)));
 
 app.get('/', (req, res, next) => {
   res.sendStatus(200);

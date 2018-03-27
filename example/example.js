@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const app = express();
 const comment = require('../lib/backend');
 const driverTypes = comment.driverTypes;
+const drivers = comment.drivers;
 
 const secret = 'my_secret';
 
@@ -22,7 +23,8 @@ const authCheck = function(req, res, next) {
 }
 */
 
-app.use('/comment', bodyParser.urlencoded({ extended: true }), /* authCheck, */ comment(driverTypes.MONGO, {}));
+app.use('/comment', bodyParser.urlencoded({ extended: true }), /* authCheck, */ comment(drivers.mongo({})));
+
 
 app.get('/', (req, res, next) => {
   res.sendStatus(200);
