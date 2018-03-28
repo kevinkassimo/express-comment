@@ -1,13 +1,15 @@
 # `express-comment` DB Driver API
 
-The following API must be complied to correctly inject database operations to backend of `express-comment`:  
+## API requirement
+The following API must be complied to correctly inject database operations to backend of `express-comment` (__NO EXCEPTION__):  
 
 ```javascript
 /*
- * Configure settings of DB connection
- * @param {Object} opts
+ * Configure settings of DB connection and operation
+ * @param {Object|null} opts: db specific settings, null means no change to previous config
+ * @param {Object|null} ecSettings: express-comment specific, null means no change to previous config
  */
-db.configure(opts);
+db.configure(opts, ecSettings);
 
 /*
  * Close the db connection
@@ -48,18 +50,10 @@ db.delete(postId, username, assoc, parentId);
 /*
  * Find by postId, default non-recursive (entry.reply not populated)
  * @param {string} postId *required*
- * @param {boolean} [isRecursive]
+ * @param {boolean|number} [isRecursive]: true => recurse to the end; false => no recursion, single layer; number => recurse a maximum of specified layers
  * @returns {Promise} with param entry (type Object|null): found entry. Would have entry.reply populated by child comments if isRecursive = true
  */
 db.findById(postId, isRecursive = false);
-
-/*
- * Find by parentId, default non-recursive (entries.$.reply not populated)
- * @param {string} parentId *required*
- * @param {boolean} [isRecursive]
- * @returns {Promise} with param entries (type Object[]): found entries. Would have entries.$.reply populated by child comments if isRecursive = true
- */
-db.findByParentId(parentId, isRecursive = false);
 
 /*
  * Find by username and assoc, must be flat and non-recursive
@@ -73,9 +67,35 @@ db.findByUsernameAndAssoc(username = null, assoc = null, limit = null);
 /*
  * Find root comments associated by assoc, default non-recursive (entries.$.reply not populated)
  * @param {string} assoc: associated article identifier, should be string *required*
- * @param {boolean} [isRecursive]
+ * @param {boolean|number} [isRecursive]: true => recurse to the end; false => no recursion, single layer; number => recurse a maximum of specified layers
  * @param {number|null} [limit]
  * @returns {Promise} with param entries (type Object[]): found entries. Would have entries.$.reply populated by child comments if isRecursive = true
  */
 db.findRootByAssoc(assoc, isRecursive = false, limit = null);
+```
+
+## Settings Requirement
+The following settings is required to be implemented. If cannot, must be explicitly specified in the README of the driver.
+
+```javascript
+const ecSettings = {
+  maxReplyLevel, // maximum allowed reply level to be inserted
+  maxRecurseLevel, // maximum level allowed to be performed in a recursive search
+}
+```
+
+## Fields of Entry
+The following fields are interface to the user. Could be implement differently internally, since it should be transparent to user.
+```javascript
+const entry = {
+  _id, // unique id {string} UNIQUE
+  username, // username {string}
+  body, // body {string}
+  assoc, // user defined id of associated article {string|null}
+  parentId, // _id of parent comment {string|null}
+  opaque, // opaque, user defined data {string}
+  level, // level of comment, 0 for root level comment {integer}
+  createdAt, // ISO representation of date of creation {string}
+  modifiedAt, // ISO representation of date of modification {string}
+}
 ```

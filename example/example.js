@@ -23,7 +23,12 @@ const authCheck = function(req, res, next) {
 }
 */
 
-app.use('/comment', bodyParser.urlencoded({ extended: true }), /* authCheck, */ comment(drivers.mongo({})));
+const ecSettings = {
+  // maxReplyLevel: 3,
+  // maxRecurseLevel: 2,
+};
+
+app.use('/comment', bodyParser.urlencoded({ extended: true }), /* authCheck, */ comment(drivers.mongo({}), ecSettings));
 
 
 app.get('/', (req, res, next) => {
