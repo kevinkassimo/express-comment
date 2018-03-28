@@ -1,14 +1,14 @@
 {
   "name": "express-comment",
-  "version": "0.0.3",
-  "description": "Express simple article/post comment system middleware (Under Pre-Alpha Development, Docs not yet complete/stable)",
+  "version": "0.1.0",
+  "description": "Express simple article post/comment/response system middleware",
   "main": "index.js",
   "scripts": {
     "test": "mocha --reporter spec --bail --check-leaks test/*"
   },
-  "keywords": ["express", "middleware", "comment"],
+  "keywords": ["express", "middleware", "comment", "post", "response"],
   "author": "Kevin Qian <kevinkassimo@gmail.com> (http://ksm.sh)",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "body-parser": "^1.18.2",
     "debug": "^3.1.0",

@@ -5,7 +5,7 @@
 This package is under __active development__, and is just entering its alpha stage. The API may change with new features added in the future.
 
 ## How to use
-Check `/lib/frontend/api.md` and `/lib/backend/api.md` for details, and `/example/*` for examples of backend use. In general, you can simply mount the middleware on a path with minimal configuration, and 
+Check [`/lib/frontend/api.md`](/lib/frontend/api.md) and [`/lib/backend/api.md`](/lib/backend/api.md) for details, and [`/example/*`](/example) for examples of backend use. In general, you can simply mount the middleware on a path with minimal configuration, and use `/lib/frontend` predefined API for simple query and update.
 
 ## Demo
 ### Front-end API
@@ -15,8 +15,8 @@ Check `/lib/frontend/api.md` and `/lib/backend/api.md` for details, and `/exampl
 let comment = commentFactory(window, '/api/express-comment/mounted/path');
 
 // If you use React/Node instead, you can likely to be able to simply (not yet tested)
-import comment from 'express-comment';
-commentFactory = comment.frontend;
+import ec from 'express-comment';
+commentFactory = ec.frontend;
 let comment = commentFactory(window, '/api/express-comment/mounted/path');
 
 // begin:
