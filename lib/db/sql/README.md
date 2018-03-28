@@ -1,11 +1,11 @@
 # `express-comment` SQL (Sequelize) Driver
-This is a SQL (multi-flavored) driver for `express-comment`. It complies with the API requirements as specified in `/lib/backend/db/api.md`. It internally uses the `Sequelize.js`.
+This is a SQL (multi-flavored) driver for `express-comment`. It complies with the API requirements as specified in `/lib/db/api.md`. It internally uses the `Sequelize.js`.
 
 ## WARNING
 It is likely that for some SQL dialects, `Sequelize.js` requires additional packages (only `mysql2` comes with this package). Install them based on instructions from it (usually will pop up error about installation details)
 
 ## Configuration
-`driver.configure(opts, ecSettings)` takes the `ecSettings`, same as described in `/lib/backend/db/api.md`. For the database `opts`, it requires the following format:
+`driver.configure(opts, ecSettings)` takes the `ecSettings`, same as described in `/lib/db/api.md`. For the database `opts`, it requires the following format:
 ```javascript
 const opts = {
   database, // name of the database, NO DEFAULT

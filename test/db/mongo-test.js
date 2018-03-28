@@ -1,8 +1,8 @@
 const assert = require('assert');
 const MongoClient = require('mongodb').MongoClient;
-const mongo = require('../../lib/backend/db/mongo');
+const mongo = require('../../lib/db/mongo');
 
-describe('backend/db/mongo', function() {
+describe('db/mongo', function() {
   let cli;
   let db;
   let coll;

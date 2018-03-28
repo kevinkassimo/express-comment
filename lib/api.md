@@ -1,11 +1,11 @@
 # `express-comment` Backend API
-Comparing to the frontend, the backend API of `express-comment` is just SO simple... You create the middleware, give is a driver instance with settings, and mount it on a path. Just be careful that you have to use `body-parser` with `urlencoded` before the middleware such that the POST operations could be correctly conducted. Done.
+Comparing to the [frontend](https://npmjs.com/package/express-comment-frontend), the backend API of `express-comment` is just SO simple... You create the middleware, give is a driver instance with settings, and mount it on a path. Just be careful that you have to use `body-parser` with `urlencoded` before the middleware such that the POST operations could be correctly conducted. Done.
 
 ```javascript
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
-const comment = require('express-comment').backend;
+const comment = require('express-comment');
 const drivers = comment.drivers;
 
 const ecSettings = {
@@ -17,7 +17,7 @@ const mongoSettings = {};
 
 app.use('/comment', bodyParser.urlencoded({ extended: true }), comment(drivers.mongo(mongoSettings), ecSettings));
 // If certain actions requires authentication, consider writing a simple middleware to check the username and (such as) JWT
-// If you want to forbid certain actions from the frontend (e.g. delete), learn about the Raw Query in '/lib/frontend/api.md' and write a middleware to check the parameter 'action' to disallow them.
+// If you want to forbid certain actions from the frontend (e.g. delete), learn about the Raw Query in README.md of express-comment-frontend and write a middleware to check the parameter 'action' to disallow them.
 
 
 app.get('/', (req, res, next) => {
@@ -47,9 +47,9 @@ const ecSettings = {
 ```
 
 ## Available Drivers
-Currently, only MongoDB driver and SQL driver are available. See their own corresponding `api.md` in their folders under `/lib/backend/db` to learn about their specific settings requirements.
+Currently, only MongoDB driver and SQL driver are available. See their own corresponding `api.md` in their folders under `/lib/db` to learn about their specific settings requirements.
 ```javascript
-const comment = require('express-comment').backend;
+const comment = require('express-comment');
 const drivers = comment.drivers;
 
 drivers.mongo(settings);

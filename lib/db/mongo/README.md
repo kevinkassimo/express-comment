@@ -1,8 +1,8 @@
 # `express-comment` MongoDB Driver
-This is a MongoDB driver for `express-comment`. It complies with the API requirements as specified in `/lib/backend/db/api.md`. It internally uses the `mongodb` native NodeJS client.
+This is a MongoDB driver for `express-comment`. It complies with the API requirements as specified in `/lib/db/api.md`. It internally uses the `mongodb` native NodeJS client.
 
 ## Configuration
-`driver.configure(opts, ecSettings)` takes the `ecSettings`, same as described in `/lib/backend/db/api.md`. For the database `opts`, it requires the following format:
+`driver.configure(opts, ecSettings)` takes the `ecSettings`, same as described in `/lib/db/api.md`. For the database `opts`, it requires the following format:
 ```javascript
 const opts = {
   url, // url to mongodb, default to 'mongodb://localhost:27017'

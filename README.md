@@ -5,18 +5,16 @@
 This package is under __active development__, and is just entering its alpha stage. The API may change with new features added in the future.
 
 ## How to use
-Check [`/lib/frontend/api.md`](/lib/frontend/api.md) and [`/lib/backend/api.md`](/lib/backend/api.md) for details, and [`/example/*`](/example) for examples of backend use. In general, you can simply mount the middleware on a path with minimal configuration, and use `/lib/frontend` predefined API for simple query and update.
+Install [`express-comment-frontend`](https://npmjs.com/package/express-comment-frontend) as frontend API and [`/lib/api.md`](/lib/api.md) for details, and [`/example/*`](/example) for examples of backend use. In general, you can simply mount the middleware on a path with minimal configuration, and use `/lib/frontend` predefined API for simple query and update.
 
 ## Demo
 ### Front-end API
 ```javascript
-// frontend code
-// remember to run `lib/frontend/index.js` first, possibly through <script />
+// frontend code, using lib/index.js of express-comment-frontend
 let comment = commentFactory(window, '/api/express-comment/mounted/path');
 
 // If you use React/Node instead, you can likely to be able to simply (not yet tested)
-import ec from 'express-comment';
-commentFactory = ec.frontend;
+import commentFactory from 'express-comment-frontend';
 let comment = commentFactory(window, '/api/express-comment/mounted/path');
 
 // begin:
@@ -83,7 +81,7 @@ comment
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
-const comment = require('../lib/backend');
+const comment = require('express-comment');
 const drivers = comment.drivers;
 
 // General settings
@@ -92,7 +90,7 @@ const ecSettings = {}
 // with MongoDB (Mongo Native Client)
 const mongo_config = {
   /* ... */
-  // see /lib/backend/db/mongo/README.md
+  // see /lib/db/mongo/README.md
 };
 app.use('/api/express-comment/mounted/path', bodyParser.urlencoded({ extended: true }), comment(drivers.mongo(mongo_config), ecSettings));
 

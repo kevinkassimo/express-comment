@@ -1,7 +1,7 @@
 const assert = require('assert');
-const sql = require('../../lib/backend/db/sql');
+const sql = require('../../lib/db/sql');
 
-describe('backend/db/sql', function() {
+describe('db/sql', function() {
   let cli;
   let db;
   let coll;

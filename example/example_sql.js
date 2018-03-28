@@ -2,8 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 // const jwt = require('jsonwebtoken')
 const app = express();
-const comment = require('../lib/backend');
-const drivers= comment.drivers;
+const comment = require('../lib');
+const drivers = comment.drivers;
 
 const secret = 'my_secret';
 

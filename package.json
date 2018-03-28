@@ -1,6 +1,6 @@
 {
   "name": "express-comment",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Express simple article post/comment/response system middleware",
   "main": "index.js",
   "scripts": {
