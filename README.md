@@ -1,10 +1,13 @@
-# `express-comment` simple article comment/post system middleware
+# `express-comment` Simple Article Post/Comment Management Middleware
+`express-comment` is a middleware bundled with frontend API utilities that allows you to create a simple yet highly usable post/comment system with minimal code.
 
 ## Condition
-This package is under __active development__ and is not even entering its alpha stage. However, you could still have a taste of how it works. For backend setup, check `example/*` files as examples. For frontend API calls, it is defined in `lib/frontend/index.js`, in which some same API calls to insert/delete/find comments are written as comments. If you want to use it in browser, simply run `lib/frontend/index.js` in browser and run `let comment = commentFactory(window, '/comment/api/mount/path')` to expose the comment API for use.
+This package is under __active development__, and is just entering its alpha stage. The API may change with new features added in the future.
 
-## Example
+## How to use
+Check `/lib/frontend/api.md` and `/lib/backend/api.md` for details, and `/example/*` for examples of backend use. In general, you can simply mount the middleware on a path with minimal configuration, and 
 
+## Demo
 ### Front-end API
 ```javascript
 // frontend code
@@ -83,39 +86,37 @@ const app = express();
 const comment = require('../lib/backend');
 const drivers = comment.drivers;
 
+// General settings
+const ecSettings = {}
+
 // with MongoDB (Mongo Native Client)
-app.use('/path/middleware/mounted', bodyParser.urlencoded({ extended: true }), comment(drivers.mongo({})));
+const mongo_config = {
+  /* ... */
+  // see /lib/backend/db/mongo/README.md
+};
+app.use('/api/express-comment/mounted/path', bodyParser.urlencoded({ extended: true }), comment(drivers.mongo(mongo_config), ecSettings));
 
 // or if with Sequelize.js (supporting MySQL, PostgreSQL, SQLite, etc.)
 const sequelize_config = {
-  /* Sequelize config settings, check Sequelize docs about config settings. */
-  host: 'localhost',
-  dialect: 'mysql',
-
-  pool: {
-    max: 5,
-    min: 0,
-    acquire: 30000,
-    idle: 10000
-  },
-  /* 
-    However, the following 3 fields are REQUIRED all the time, that are not Sequelize defined:
-  */ 
   database: 'ec',
   username: 'root',
   password: '',
+  settings: {
+    /* Sequelize config settings, check Sequelize docs about config settings. */
+    host: 'localhost',
+    dialect: 'mysql',
+
+    pool: {
+      max: 5,
+      min: 0,
+      acquire: 30000,
+      idle: 10000
+    },
+  }
 }
-app.use('/path/middleware/mounted', bodyParser.urlencoded({ extended: true }), comment(drivers.sql(sequelize_config)));
+app.use('/path/middleware/mounted', bodyParser.urlencoded({ extended: true }), comment(drivers.sql(sequelize_config), ecSettings));
 
 /* ... */
 
 // You are good to go!
 ```
-
-## TODOs
-API stability, settlement of final design, better documentation, etc.
-
-## Ideas
-1. Insert cap (max reply level, implement with adding an extra field (level, 0 as root comment)to each entry) (__DONE__)
-2. `comment(driverType.MONGO, settings)` -> `comment(driver.mongo(settings), comment_settings)`
-3. implement range for recursive actions (`comment.findAll(startRange, endRange)`)

@@ -7,7 +7,7 @@ The following API must be complied to correctly inject database operations to ba
 /*
  * Configure settings of DB connection and operation
  * @param {Object|null} opts: db specific settings, null means no change to previous config
- * @param {Object|null} ecSettings: express-comment specific, null means no change to previous config
+ * @param {Object|null} ecSettings: express-comment specific, null means no change to previous config. This is required, since some ecSettings would only we actually implemented in the Driver level
  */
 db.configure(opts, ecSettings);
 

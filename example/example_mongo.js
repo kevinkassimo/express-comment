@@ -3,7 +3,6 @@ const bodyParser = require('body-parser');
 // const jwt = require('jsonwebtoken')
 const app = express();
 const comment = require('../lib/backend');
-const driverTypes = comment.driverTypes;
 const drivers = comment.drivers;
 
 const secret = 'my_secret';
