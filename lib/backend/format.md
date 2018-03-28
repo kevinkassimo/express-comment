@@ -26,6 +26,13 @@ parentId? = parent_id
 
 ## `GET` actions  
 ```
+# count
+action = count
+postId? = id
+username? = username
+assoc? = assoc_id
+parentId? = parent_id
+
 # findById
 action = findById
 postId = id
