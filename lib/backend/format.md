@@ -1,4 +1,5 @@
-# Query Format
+# Raw Query Format
+These are query formats for reference if you decide not to use the frontend code provided in `/lib/frontend`, and want to create your own requests.  
 
 ## `POST` actions
 ```
